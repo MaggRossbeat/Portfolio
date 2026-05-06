@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robin ERIAU — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ef;
+    --text: #1a1a1a;
+    --accent: #1e6fa8;
+    --accent2: #3ab5c1;
+    --muted: #888;
+    --border: #ddd;
+    --card: #fff;
+    --nav-h: 64px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: rgba(245,243,239,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0; right: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  /* SECTIONS */
+  section {
+    min-height: 100vh;
+    padding: calc(var(--nav-h) + 80px) 48px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  section.full {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* HERO */
+  #accueil {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    min-height: 100vh;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: calc(var(--nav-h) + 80px) 48px 80px;
+  }
+
+  .hero-photo {
+    flex-shrink: 0;
+    width: 260px;
+    height: 320px;
+    object-fit: cover;
+    filter: grayscale(20%);
+    border-radius: 2px;
+    box-shadow: 12px 16px 40px rgba(0,0,0,0.12);
+  }
+
+  .hero-text { flex: 1; }
+
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 480px;
+    margin-bottom: 40px;
+  }
+
+  .hero-goal {
+    border-left: 3px solid var(--accent);
+    padding-left: 20px;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 40px;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--text);
+    color: #fff;
+    padding: 12px 28px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .btn:hover { background: var(--accent); }
+
+  /* SECTION TITLES */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .section-line {
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    margin-bottom: 56px;
+  }
+
+  /* FORMATION */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+
+  .tl-item {
+    display: flex;
+    gap: 40px;
+    position: relative;
+    padding-bottom: 48px;
+  }
+
+  .tl-item:last-child { padding-bottom: 0; }
+
+  .tl-left {
+    width: 120px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .tl-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .tl-dot-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20px;
+    flex-shrink: 0;
+  }
+
+  .tl-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .tl-line {
+    flex: 1;
+    width: 1px;
+    background: var(--border);
+    margin-top: 4px;
+  }
+
+  .tl-content { flex: 1; }
+
+  .tl-degree {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .tl-school {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    font-size: 0.78rem;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+
+  /* COMPETENCES */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .skill-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+  }
+
+  .skill-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .skill-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .skill-list li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-list li::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent2);
+    flex-shrink: 0;
+  }
+
+  /* EXPERIENCES */
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .exp-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .exp-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+  }
+
+  .exp-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, #f0f7fd, #fff);
+  }
+
+  .exp-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  .exp-period {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .exp-role {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .exp-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .exp-list li {
+    font-size: 0.875rem;
+    color: var(--text);
+    display: flex;
+    gap: 8px;
+  }
+
+  .exp-list li::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* INTERETS */
+  .interests-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .interest-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 40px 32px;
+    text-align: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .interest-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+  }
+
+  .interest-emoji { font-size: 2.5rem; margin-bottom: 16px; }
+
+  .interest-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .interest-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  /* CONNAISSANCES */
+  .know-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .know-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+  }
+
+  .know-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.85rem;
+    color: var(--accent);
+  }
+
+  .lang-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .lang-name { font-size: 0.95rem; font-weight: 500; }
+
+  .lang-stars { display: flex; gap: 4px; }
+
+  .star {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  .star.filled { background: var(--accent); }
+
+  .tools-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tool-badge {
+    font-size: 0.8rem;
+    padding: 5px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    font-weight: 500;
+  }
+
+  /* CONTACT */
+  #contact {
+    min-height: auto;
+    padding-bottom: 120px;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .contact-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    color: var(--text);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .contact-item:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+    color: var(--accent);
+  }
+
+  .contact-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    color: #fff;
+  }
+
+  .contact-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .contact-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 32px;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* FADE IN */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: none; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { gap: 16px; }
+    .nav-links a { font-size: 0.75rem; }
+
+    #accueil {
+      flex-direction: column;
+      text-align: center;
+      padding: calc(var(--nav-h) + 40px) 20px 60px;
+      gap: 40px;
+    }
+
+    .hero-photo { width: 180px; height: 220px; }
+
+    section { padding: calc(var(--nav-h) + 60px) 20px 60px; }
+
+    .skills-grid, .exp-grid, .interests-grid { grid-template-columns: 1fr; }
+    .know-grid, .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#accueil" class="nav-logo">Robin ERIAU</a>
+  <ul class="nav-links">
+    <li><a href="#formation">Formation</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#experiences">Expériences</a></li>
+    <li><a href="#interets">Intérêts</a></li>
+    <li><a href="#connaissances">Connaissances</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ACCUEIL -->
+<section id="accueil">
+  <div class="hero-text fade-up">
+    <p class="hero-eyebrow">Portfolio — 3ème année BUT</p>
+    <h1 class="hero-name">Robin<br>ERIAU</h1>
+    <p class="hero-sub">Étudiant en Management de la Logistique et des Transports · 20 ans · Alternant chez ArcelorMittal SSC, Saint-Nazaire</p>
+    <p class="hero-goal">« À la suite de mes études, j'aimerais intégrer les métiers de la logistique industrielle. »</p>
+    <a href="#formation" class="btn">Découvrir mon parcours</a>
+  </div>
+</section>
+
+<!-- FORMATION -->
+<section id="formation">
+  <h2 class="section-title fade-up">Formation</h2>
+  <div class="section-line fade-up"></div>
+
+  <div class="timeline">
+    <div class="tl-item fade-up">
+      <div class="tl-left">
+        <span class="tl-year">2023 — 2026</span>
+      </div>
+      <div class="tl-dot-line">
+        <div class="tl-dot"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-degree">BUT — Management de la Logistique et des Transports</div>
+        <div class="tl-school">IUT · Formation en alternance (3ème année)</div>
+        <div class="tag-cloud">
+          <span class="tag">Logistique</span>
+          <span class="tag">Transport multimodal</span>
+          <span class="tag">Gestion de projet</span>
+          <span class="tag">Systèmes d'information</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item fade-up">
+      <div class="tl-left">
+        <span class="tl-year">2020 — 2023</span>
+      </div>
+      <div class="tl-dot-line">
+        <div class="tl-dot"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-degree">Baccalauréat STMG</div>
+        <div class="tl-school">Spécialité Sciences et Technologies du Management et de la Gestion</div>
+        <div class="tag-cloud">
+          <span class="tag">Management</span>
+          <span class="tag">Économie</span>
+          <span class="tag">Comptabilité</span>
+          <span class="tag">Droit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETENCES -->
+<section id="competences">
+  <h2 class="section-title fade-up">Compétences</h2>
+  <div class="section-line fade-up"></div>
+
+  <div class="skills-grid">
+    <div class="skill-card fade-up">
+      <div class="skill-card-title">
+        <div class="skill-icon">📦</div>
+        Logistique
+      </div>
+      <ul class="skill-list">
+        <li>ERP / WMS</li>
+        <li>FIFO, LIFO</li>
+        <li>Gestion de stock</li>
+        <li>Gestion d'entrepôt</li>
+        <li>Green Supply-Chain</li>
+        <li>Quantité économique</li>
+        <li>Point de commande / recomplètement</li>
+        <li>Stock de sécurité</li>
+        <li>Maîtrise des coûts</li>
+      </ul>
+    </div>
+
+    <div class="skill-card fade-up">
+      <div class="skill-card-title">
+        <div class="skill-icon">🚛</div>
+        Transport
+      </div>
+      <ul class="skill-list">
+        <li>Incoterms</li>
+        <li>Zones IATA</li>
+        <li>Class Rates / SCR / GCR / LTA</li>
+        <li>Lettre de voiture</li>
+        <li>RSE</li>
+        <li>Plannings routiers</li>
+        <li>Calculs de coûts</li>
+        <li>Plan de chargement</li>
+        <li>CK, CC, CV, CS</li>
+      </ul>
+    </div>
+
+    <div class="skill-card fade-up">
+      <div class="skill-card-title">
+        <div class="skill-icon">📊</div>
+        Management
+      </div>
+      <ul class="skill-list">
+        <li>Forces de Porter</li>
+        <li>Démarche qualité</li>
+        <li>Gestion budgétaire</li>
+        <li>GANTT / PERT</li>
+        <li>QQOQCCP / Ishikawa</li>
+        <li>PESTEL</li>
+        <li>Sourcing</li>
+        <li>Cahier des charges</li>
+        <li>Gestion de conflit</li>
+      </ul>
+    </div>
+
+    <div class="skill-card fade-up" style="grid-column: 1 / -1;">
+      <div class="skill-card-title">
+        <div class="skill-icon">💻</div>
+        Compétences techniques (Alternance)
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px;">
+        <ul class="skill-list">
+          <li>SAP (OrderBook, VTR, KFD)</li>
+          <li>Power BI — tableaux de bord stock</li>
+        </ul>
+        <ul class="skill-list">
+          <li>Suivi de projet & questionnaires</li>
+          <li>Suivi de stock terrain & SAP</li>
+        </ul>
+        <ul class="skill-list">
+          <li>Communication & présentation projet</li>
+          <li>Coordination intégration SAP transport</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="experiences">
+  <h2 class="section-title fade-up">Expériences</h2>
+  <div class="section-line fade-up"></div>
+
+  <div class="exp-grid">
+    <div class="exp-card featured fade-up">
+      <div>
+        <div class="exp-period">2025 — 2026 · Alternance</div>
+        <div class="exp-company">ArcelorMittal SSC</div>
+        <div class="exp-role">Logistique industrielle · Saint-Nazaire</div>
+      </div>
+      <ul class="exp-list">
+        <li>Optimisation stock & plans de stockage</li>
+        <li>Études de flux</li>
+        <li>Audit terrain</li>
+        <li>Intégration SAP</li>
+        <li>Recherche de solutions logistiques</li>
+        <li>Présentation de projets aux équipes</li>
+      </ul>
+    </div>
+
+    <div class="exp-card fade-up">
+      <div>
+        <div class="exp-period">2024 · Stage 2 mois</div>
+        <div class="exp-company">ArcelorMittal</div>
+        <div class="exp-role">2ème année de BUT</div>
+      </div>
+      <ul class="exp-list">
+        <li>Création d'une nouvelle zone de stockage</li>
+        <li>Gestion de l'accroissement d'activité</li>
+        <li>Picking</li>
+      </ul>
+    </div>
+
+    <div class="exp-card fade-up">
+      <div>
+        <div class="exp-period">Saisonnier</div>
+        <div class="exp-company">E.Leclerc</div>
+        <div class="exp-role">Mi-juin à début août</div>
+      </div>
+      <ul class="exp-list">
+        <li>Mise en rayon</li>
+        <li>Conditionnement de denrées</li>
+      </ul>
+    </div>
+
+    <div class="exp-card fade-up">
+      <div>
+        <div class="exp-period">2023 · Stage 1 mois</div>
+        <div class="exp-company">Gliss Évolution</div>
+        <div class="exp-role">1ère année de BUT</div>
+      </div>
+      <ul class="exp-list">
+        <li>Découverte du métier de préparateur de commandes</li>
+      </ul>
+    </div>
+
+    <div class="exp-card fade-up" style="grid-column: span 2; background: linear-gradient(135deg, #f0f7fd, #fff); border-color: var(--accent2);">
+      <div class="exp-period">Projet professionnel</div>
+      <div class="exp-company" style="font-size:1rem; margin-top:8px;">Après mon alternance, j'envisage d'intégrer un Master en gestion de production afin d'approfondir mes connaissances théoriques et d'appliquer davantage de compétences techniques.</div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERETS -->
+<section id="interets">
+  <h2 class="section-title fade-up">Centres d'intérêts</h2>
+  <div class="section-line fade-up"></div>
+
+  <div class="interests-grid">
+    <div class="interest-card fade-up">
+      <div class="interest-emoji">🎵</div>
+      <div class="interest-label">Musique</div>
+      <div class="interest-desc">Passionné de hip-hop et de rap francophone et américain</div>
+    </div>
+    <div class="interest-card fade-up">
+      <div class="interest-emoji">🚗</div>
+      <div class="interest-label">Voitures</div>
+      <div class="interest-desc">Intérêt marqué pour l'automobile et la culture auto</div>
+    </div>
+    <div class="interest-card fade-up">
+      <div class="interest-emoji">✈️</div>
+      <div class="interest-label">Voyages</div>
+      <div class="interest-desc">Ouvert sur le monde — Barcelone, découverte de nouvelles cultures</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNAISSANCES -->
+<section id="connaissances">
+  <h2 class="section-title fade-up">Connaissances</h2>
+  <div class="section-line fade-up"></div>
+
+  <div class="know-grid">
+    <div class="know-card fade-up">
+      <div class="know-card-title">Langues</div>
+      <div class="lang-item">
+        <span class="lang-name">Français</span>
+        <div class="lang-stars">
+          <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star filled"></div>
+        </div>
+      </div>
+      <div class="lang-item">
+        <span class="lang-name">Anglais</span>
+        <div class="lang-stars">
+          <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star"></div>
+        </div>
+      </div>
+      <div class="lang-item">
+        <span class="lang-name">Espagnol</span>
+        <div class="lang-stars">
+          <div class="star filled"></div><div class="star filled"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+      </div>
+      <div style="margin-top:16px; font-size:0.8rem; color:var(--muted);">Certifications : Voltaire · TOEIC</div>
+    </div>
+
+    <div class="know-card fade-up">
+      <div class="know-card-title">Bureautique & Logiciels</div>
+      <div class="tools-row">
+        <span class="tool-badge">SAP</span>
+        <span class="tool-badge">Power BI</span>
+        <span class="tool-badge">VBA</span>
+        <span class="tool-badge">Odoo</span>
+        <span class="tool-badge">Excel</span>
+        <span class="tool-badge">Word</span>
+        <span class="tool-badge">PowerPoint</span>
+        <span class="tool-badge">Project</span>
+        <span class="tool-badge">Canva</span>
+      </div>
+    </div>
+
+    <div class="know-card fade-up">
+      <div class="know-card-title">Démarche qualité & Droit</div>
+      <ul class="skill-list">
+        <li>Normes ISO</li>
+        <li>Charte qualité</li>
+        <li>Droit des transports (Maritime, Routier, Fluvial, Aérien)</li>
+        <li>Droit civil · commercial · du travail</li>
+        <li>Rédaction de rapports de stage</li>
+      </ul>
+    </div>
+
+    <div class="know-card fade-up">
+      <div class="know-card-title">Projet professionnel</div>
+      <p style="font-size:0.9rem; color:var(--muted); line-height:1.7;">
+        Master en <strong style="color:var(--text)">gestion de production</strong> — pour approfondir mes connaissances théoriques et renforcer mon expertise opérationnelle dans la logistique industrielle.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="section-title fade-up">Contact</h2>
+  <div class="section-line fade-up"></div>
+
+  <div class="contact-grid">
+    <a href="mailto:eriaurobin.pro@gmail.com" class="contact-item fade-up">
+      <div class="contact-icon">✉</div>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">eriaurobin.pro@gmail.com</div>
+      </div>
+    </a>
+
+    <a href="tel:+33783148349" class="contact-item fade-up">
+      <div class="contact-icon">📞</div>
+      <div>
+        <div class="contact-label">Téléphone</div>
+        <div class="contact-value">+33 7 83 14 83 49</div>
+      </div>
+    </a>
+
+    <div class="contact-item fade-up" style="cursor:default;">
+      <div class="contact-icon">📍</div>
+      <div>
+        <div class="contact-label">Adresse</div>
+        <div class="contact-value">150 Boulevard du Dr René Laennec</div>
+      </div>
+    </div>
+
+    <a href="https://www.linkedin.com/in/55572293" target="_blank" class="contact-item fade-up">
+      <div class="contact-icon">in</div>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">@Robin ERIAU</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Robin ERIAU — Portfolio BUT Management de la Logistique et des Transports</p>
+</footer>
+
+<script>
+  // Fade-up on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Active nav link
+  const sections = document.querySelectorAll('section[id], #accueil');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.style.color = '');
+        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (active) active.style.color = 'var(--text)';
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+
+  document.querySelectorAll('section[id]').forEach(s => navObserver.observe(s));
+</script>
+</body>
+</html>
